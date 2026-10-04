@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import {
   ArrowDown,
@@ -183,13 +183,20 @@ export function ProductMockup() {
     { question: "How often do you conduct penetration testing?", answer: "I could not find this in your documents.", confidence: "None", status: "Not found" },
     { question: "What is your incident response process?", answer: "Incidents are triaged, documented, and escalated to the response team.", confidence: "High", status: "Approved" },
   ];
+  const sidebarLinks = [
+    { icon: PanelLeft, label: "Dashboard" },
+    { icon: FileText, label: "Documents" },
+    { icon: Sparkles, label: "Ask" },
+    { icon: FileCheck2, label: "Questionnaires" },
+    { icon: LockKeyhole, label: "Settings" },
+  ];
   return (
     <div className="mockup-wrap" aria-label="Sample questionnaire review screen">
       <div className="mockup-window">
         <div className="window-bar"><div className="window-dots"><i /><i /><i /></div><div className="window-address"><LockKeyhole /> app.trustloop.com / questionnaires / review</div><div className="window-avatar">JD</div></div>
         <div className="product-layout">
           <aside className="product-sidebar"><div className="sidebar-logo"><span><Fingerprint size={17} /></span>trustloop</div><div className="workspace-label">WORKSPACE</div>
-            {[[PanelLeft, "Dashboard"], [FileText, "Documents"], [Sparkles, "Ask"], [FileCheck2, "Questionnaires"], [LockKeyhole, "Settings"]].map(([Icon, label]) => <div className={`sidebar-item${label === "Questionnaires" ? " active" : ""}`} key={String(label)}><Icon size={15} />{String(label)}</div>)}
+            {sidebarLinks.map(({ icon: Icon, label }) => <div className={`sidebar-item${label === "Questionnaires" ? " active" : ""}`} key={label}><Icon size={15} />{label}</div>)}
             <div className="sidebar-account"><div className="sidebar-account-avatar">AC</div><div>Acme Cloud<small>Team workspace</small></div><ChevronRight size={13} /></div>
           </aside>
           <div className="product-main"><div className="mock-breadcrumb">Questionnaires <ChevronRight /> <span>Vendor security review</span></div>
@@ -288,7 +295,7 @@ export function HomePage() {
   return <><Hero /><Problems /><Features /><HowItWorks /><TrustSection /><PricingSection /><FAQ /><FinalCTA /></>;
 }
 
-export function SiteLayout({ children }: { children: React.ReactNode }) {
+export function SiteLayout({ children }: { children: ReactNode }) {
   return <><Navbar />{children}<Footer /></>;
 }
 

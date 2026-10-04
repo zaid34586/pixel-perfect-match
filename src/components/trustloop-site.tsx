@@ -288,6 +288,10 @@ export function HomePage() {
   return <><Hero /><Problems /><Features /><HowItWorks /><TrustSection /><PricingSection /><FAQ /><FinalCTA /></>;
 }
 
+export function SiteLayout({ children }: { children: React.ReactNode }) {
+  return <><Navbar />{children}<Footer /></>;
+}
+
 export function PricingPage() {
   return <main className="inner-page"><div className="site-shell"><header className="inner-intro"><div className="eyebrow"><span />PRICING</div><h1>Plans that scale with your team.</h1><p>Clear monthly pricing for a better way to work through customer security reviews.</p></header></div><PricingSection fullPage /><section className="inner-faq"><div className="site-shell faq-layout"><SectionHeading eyebrow="PLAN DETAILS" title="Pricing questions." /><Accordion type="single" collapsible className="faq-list">{[faqItems[0], faqItems[2], faqItems[5]].map((item, i) => <AccordionItem value={`pricing-${i}`} key={item.question}><AccordionTrigger>{item.question}</AccordionTrigger><AccordionContent>{item.answer}</AccordionContent></AccordionItem>)}</Accordion></div></section><FinalCTA /></main>;
 }

@@ -212,11 +212,11 @@ export function ProductMockup() {
 }
 
 function Hero() {
-  return <section className="hero-stage"><div className="hero-glow" /><div className="site-shell hero-content"><div className="hero-badge"><Sparkles />AI answers grounded in your own documents</div>
-    <h1>Answer security questionnaires in <span>minutes,</span> not weeks.</h1>
-    <p className="hero-copy">Spend less time searching through old spreadsheets. Trustloop drafts clear, sourced answers so your team can focus on the work that moves deals forward.</p>
+  return <section className="hero-stage"><div className="site-shell hero-content"><div className="hero-badge"><span className="badge-pulse" />A clearer way through every security review</div>
+    <h1>Security answers,<br /><span>without the search.</span></h1>
+    <p className="hero-copy">Turn scattered policies and past answers into a review-ready first draft. Trustloop finds the relevant evidence, drafts a response, and keeps your team in control of what gets shared.</p>
     <div className="hero-actions"><Button asChild size="lg" className="button-dark"><a href={earlyAccess}>Get early access <ArrowRight /></a></Button><a className="text-link" href="#how-it-works">See how it works <ArrowDown /></a></div>
-    <div className="hero-checks">{["Answers from your own documents", "Human review before anything is sent", "Works with Excel questionnaires", "Source shown for every answer"].map((text) => <div key={text}><CheckCircle2 />{text}</div>)}</div>
+    <div className="hero-checks">{["Grounded in your documents", "Sources alongside answers", "Reviewed by your team"].map((text) => <div key={text}><CheckCircle2 />{text}</div>)}</div>
     <ProductMockup />
   </div></section>;
 }
@@ -242,6 +242,10 @@ function Problems() {
 
 function Features() {
   return <section id="features" className="section-band feature-band"><div className="site-shell"><SectionHeading eyebrow="MADE FOR THE REAL WORK" title="Every answer, in context." body="A practical workflow that keeps your source material and your judgment in the loop." centered /><div className="feature-grid">{featureItems.map(({ icon: Icon, title, body }, index) => <article className="feature-item" key={title}><div className="feature-icon"><Icon /></div><span className="feature-index">0{index + 1}</span><h3>{title}</h3><p>{body}</p></article>)}</div></div></section>;
+}
+
+function EvidenceSection() {
+  return <section className="evidence-band"><div className="site-shell evidence-layout"><div className="evidence-copy"><div className="eyebrow"><span />THE DETAIL BEHIND THE DRAFT</div><h2>Know where every answer comes from.</h2><p>When a customer asks how you protect their data, the answer should be more than a confident-sounding sentence. Trustloop brings the supporting material into the same review so your team can check the wording against its source.</p><div className="evidence-notes"><div><span>01</span><div><h3>Find the relevant context</h3><p>Work from the policies and security documents your team provides, not a generic answer bank.</p></div></div><div><span>02</span><div><h3>Keep uncertainty visible</h3><p>If the documents do not support an answer, mark it as not found and investigate before responding.</p></div></div><div><span>03</span><div><h3>Make the final call</h3><p>Edit, review, and approve the response before exporting the completed questionnaire.</p></div></div></div></div><div className="evidence-example" aria-label="Sample answer and source"><div className="example-top"><span>QUESTION 02 / 04</span><span><CheckCircle2 size={15} /> SOURCE AVAILABLE</span></div><h3>Do you encrypt customer data at rest?</h3><div className="example-label">SUGGESTED ANSWER</div><p>Customer data is encrypted at rest using managed storage controls.</p><div className="example-source"><div><FileText size={18} /><span>SOURCE DOCUMENT<small>Data protection policy · Section 3.2</small></span></div><blockquote>“Customer data stored in managed systems is encrypted at rest.”</blockquote></div><div className="example-footer"><span>Sample data for illustration</span><span>Ready for human review <ArrowUpRight size={15} /></span></div></div></div></section>;
 }
 
 function HowItWorks() {
@@ -292,7 +296,7 @@ function FinalCTA() {
 }
 
 export function HomePage() {
-  return <><Hero /><Problems /><Features /><HowItWorks /><TrustSection /><PricingSection /><FAQ /><FinalCTA /></>;
+  return <><Hero /><Problems /><Features /><EvidenceSection /><HowItWorks /><TrustSection /><PricingSection /><FAQ /><FinalCTA /></>;
 }
 
 export function SiteLayout({ children }: { children: ReactNode }) {
@@ -308,7 +312,7 @@ function PageIntro({ eyebrow, title, description }: { eyebrow: string; title: st
 }
 
 export function AboutPage() {
-  return <main className="inner-page"><div className="site-shell"><PageIntro eyebrow="ABOUT TRUSTLOOP" title="A clearer way to answer security reviews." description="Trustloop is built to help software teams spend less time reworking questionnaire answers and more time focused on their customers." /><article className="editorial-content"><h2>Why Trustloop</h2><p>Security questionnaires are an important part of earning customer trust, but answering them repeatedly can take time away from the work of building software. Trustloop brings your source documents and questionnaire review into one focused workflow.</p><h2>Our mission</h2><p>Make security reviews more manageable for the teams doing the work—without taking people out of the decision-making process.</p><p className="about-rivox">Trustloop is a Rivox product. <a href="https://rivoxcloud.com" target="_blank" rel="noreferrer">Visit Rivox <ArrowUpRight /></a></p><p className="last-updated">Last updated: [DATE]</p></article></div></main>;
+  return <main className="inner-page"><div className="site-shell"><PageIntro eyebrow="ABOUT TRUSTLOOP" title="A clearer way to answer security reviews." description="Trustloop is built to help software teams spend less time reworking questionnaire answers and more time focused on their customers." /><article className="editorial-content"><h2>Why Trustloop</h2><p>Security questionnaires are an important part of earning customer trust, but answering them repeatedly can take time away from the work of building software. Trustloop brings your source documents and questionnaire review into one focused workflow.</p><p>For many teams, the information already exists. It lives in policies, internal documents, and responses from previous reviews. The difficult part is finding the right detail, adapting it to a new question, and making sure it still reflects how the company works today.</p><h2>A workflow built around judgment</h2><p>Trustloop starts with the material your team provides. It drafts answers with supporting sources, makes gaps visible, and leaves the final decision with the people who know the business. It is designed to support a careful review, not replace one.</p><h2>Our mission</h2><p>Make security reviews more manageable for the teams doing the work—without taking people out of the decision-making process. When a response is ready to share, your team should know what it says and why.</p><p className="about-rivox">Trustloop is a Rivox product. <a href="https://rivoxcloud.com" target="_blank" rel="noreferrer">Visit Rivox <ArrowUpRight /></a></p><p className="last-updated">Last updated: [DATE]</p></article></div></main>;
 }
 
 export function ContactPage() {

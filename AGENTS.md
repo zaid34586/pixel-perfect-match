@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep Trustloop's marketing pages in the shared site component and route-specific metadata in each leaf route, so presentation stays consistent while pages remain independently discoverable.

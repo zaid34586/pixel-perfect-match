@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import {
   ArrowDown,
@@ -299,8 +299,56 @@ export function HomePage() {
   return <><Hero /><Problems /><Features /><EvidenceSection /><HowItWorks /><TrustSection /><PricingSection /><FAQ /><FinalCTA /></>;
 }
 
+function SiteEffects() {
+  useEffect(() => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const targets = Array.from(document.querySelectorAll<HTMLElement>(
+      ".section-heading, .problem-item, .feature-item, .evidence-copy, .evidence-example, .step-row, .trust-copy, .trust-points > div, .price-plan, .comparison-wrap, .faq-list, .cta-inner, .inner-intro, .editorial-content, .contact-layout",
+    ));
+
+    const updateHeader = () => {
+      document.documentElement.toggleAttribute("data-scrolled", window.scrollY > 18);
+    };
+
+    if (reducedMotion) {
+      targets.forEach((target) => target.setAttribute("data-revealed", "true"));
+      updateHeader();
+      window.addEventListener("scroll", updateHeader, { passive: true });
+      return () => window.removeEventListener("scroll", updateHeader);
+    }
+
+    targets.forEach((target, index) => {
+      target.setAttribute("data-reveal", "");
+      target.setAttribute("data-reveal-order", String((index % 3) + 1));
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.setAttribute("data-revealed", "true");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -6% 0px" },
+    );
+
+    targets.forEach((target) => observer.observe(target));
+    updateHeader();
+    window.addEventListener("scroll", updateHeader, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", updateHeader);
+      document.documentElement.removeAttribute("data-scrolled");
+    };
+  }, []);
+
+  return null;
+}
+
 export function SiteLayout({ children }: { children: ReactNode }) {
-  return <><Navbar />{children}<Footer /></>;
+  return <><SiteEffects /><Navbar />{children}<Footer /></>;
 }
 
 export function PricingPage() {

@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Keep Trustloop's marketing pages in the shared site component and route-specific metadata in each leaf route, so presentation stays consistent while pages remain independently discoverable.
+- Keep marketing motion progressive and accessibility-aware: shared intersection-based reveals may enhance content, but all content must remain visible without JavaScript and with reduced motion enabled.

@@ -78,6 +78,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 
 .site-shell { width: min(100% - 64px, 1160px); margin-inline: auto; }
 .site-header { position: sticky; z-index: 30; top: 0; background: color-mix(in oklab, var(--background) 90%, transparent); backdrop-filter: blur(18px); border-bottom: 1px solid color-mix(in oklab, var(--border) 78%, transparent); }
+html[data-scrolled] .site-header { box-shadow: 0 10px 30px -24px color-mix(in oklab, var(--foreground) 28%, transparent); }
 .nav-inner { height: 72px; display: flex; align-items: center; justify-content: space-between; }
 .brand { display: inline-flex; align-items: center; gap: 9px; color: var(--navy); font-size: 20px; font-weight: 750; letter-spacing: 0; }
 .brand-mark { width: 31px; height: 31px; display: grid; place-items: center; color: var(--primary); }
@@ -251,6 +252,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  [data-reveal] { opacity: 1 !important; transform: none !important; }
 }
 
 /* Trustloop premium editorial treatment */
@@ -370,6 +372,39 @@ h1, h2, h3, .brand, .plan-price { font-family: "Sora", var(--font-sans); letter-
 .inner-intro > p { font-size: 17px; }
 .editorial-content h2 { font-size: 23px; }
 .editorial-content p { font-size: 15px; }
+
+/* Subtle premium motion: progressive enhancement only after JavaScript loads. */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 650ms cubic-bezier(.22, 1, .36, 1), transform 650ms cubic-bezier(.22, 1, .36, 1);
+  will-change: opacity, transform;
+}
+[data-reveal-order="2"] { transition-delay: 80ms; }
+[data-reveal-order="3"] { transition-delay: 160ms; }
+[data-reveal][data-revealed="true"] { opacity: 1; transform: translateY(0); }
+.hero-badge { animation: hero-enter 620ms 60ms cubic-bezier(.22, 1, .36, 1) both; }
+.hero-content h1 { animation: hero-enter 720ms 130ms cubic-bezier(.22, 1, .36, 1) both; }
+.hero-copy { animation: hero-enter 720ms 210ms cubic-bezier(.22, 1, .36, 1) both; }
+.hero-actions { animation: hero-enter 720ms 290ms cubic-bezier(.22, 1, .36, 1) both; }
+.hero-checks { animation: hero-enter 720ms 360ms cubic-bezier(.22, 1, .36, 1) both; }
+.mockup-wrap { animation: mockup-enter 900ms 390ms cubic-bezier(.22, 1, .36, 1) both; }
+.mockup-window { transform: translateZ(0); transition: transform 420ms cubic-bezier(.22, 1, .36, 1), box-shadow 420ms ease; }
+.mockup-wrap:hover .mockup-window { transform: translateY(-5px); box-shadow: 0 44px 82px -48px color-mix(in oklab, var(--foreground) 34%, transparent); }
+.problem-item, .feature-item, .price-plan, .evidence-example { transition-property: opacity, transform, background-color, border-color, box-shadow; }
+.problem-item:hover { border-color: var(--primary); }
+.feature-item:hover, .price-plan:hover, .evidence-example:hover { transform: translateY(-4px); }
+.price-plan:hover, .evidence-example:hover { box-shadow: 0 24px 46px -34px color-mix(in oklab, var(--foreground) 28%, transparent); }
+.step-row > svg { transition: transform 220ms ease; }
+.step-row:hover > svg { transform: translateX(5px); }
+@keyframes hero-enter {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes mockup-enter {
+  from { opacity: 0; transform: translateY(30px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
 @media (max-width: 900px) {
   .site-shell { width: min(100% - 48px, 760px); }
   .evidence-layout { gap: 5%; }
